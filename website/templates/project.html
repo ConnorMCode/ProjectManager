@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}{{ project.title }} To-Do List{% endblock %}
+
+{% block content%}
+<h1 align="center">To Do</h1>
+<ul class="list-group list-group-flush" id="projects">
+    {% for todo in project.to_do %}
+    <li class="list-group-item">
+        {{ todo.data }}
+        <button type="button" class="close" onClick="deleteToDo({{ todo.id }})">
+            <span aria-hidden="true">&times</span>
+        </button>
+    </li>
+    {% endfor %}
+</ul>
+<form method = "POST">
+    <textarea name="todo" id="todo" class="form-control"></textarea>
+    <br />
+    <div align="center">
+        <button type="submit" class="btn btn-primary">Add To-Do</button>
+    </div>
+</form>
+{% endblock %}

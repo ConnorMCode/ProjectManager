@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}{{ user.first_name }}'s Project Page{% endblock %}
+
+{% block content%}
+<h1 align="center">{{ user.first_name }}'s Projects</h1>
+<ul class="list-group list-group-flush" id="projects">
+    {% for project in user.projects %}
+    <li class="list-group-item">
+        <a href="/{{project.title}}">{{ project.title }}</a>
+        {% if project.user_id == current_user.id %}
+        <button type="button" class="close" onClick="deleteProject({{ project.id }})">
+            <span aria-hidden="true">&times</span>
+        </button>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+<form method = "POST">
+    <textarea name="project" id="project" class="form-control"></textarea>
+    <br />
+    <div align="center">
+        <button type="submit" class="btn btn-primary">Add Project</button>
+    </div>
+</form>
+{% endblock %}
